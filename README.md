@@ -10,7 +10,7 @@
 
 ### Routes and models
 
-- My routes will include ('/seasons', '/teams', '/standings', '/search', '/seasons/teamstatistics, '/players/:id') and will be uing Get/Put/Delete/ and Post methods
+- My routes will include ('/seasons', '/teams', '/standings', '/players/:id') and will be uing Get/Put/Delete/ and Post methods
 
 - My models will be Team, Standing, Season, and Player
 
@@ -19,20 +19,19 @@
 
 ### User Stories
 
-- Your user stories are a way to talk about your applications features in the following format:
 
 - As a user I should be able to query ('/standings) to find a teams record in any given season betweet the years discussed 
 
-- As a user I should be able to query ('/teamstatistics) to search for a teams averages for the year and where they placed in the standings
-
+- As a user I should be able to query ('/teams) to see how many team are available in the league 
+ 
 - As a user i should be able to query ('/standings') to update a teams record while the season is still going on to keep the information accurate
 
 
 ### MVP Goals
 
-- I want to be able to Get/Post/Put/Delete information on a NBA seasons,teams,standings, and team stats 
+- I want to be able to Get/Post/Put/Delete information on a NBA seasons,teams, and standings
 
-- I want to be able to search for any info about the teams and their stats 
+- I want to be able to search for any info about the teams over the years 
 
 - I want to be able to get the information on only the players that made the All-NBA 1st Team in each season
 
