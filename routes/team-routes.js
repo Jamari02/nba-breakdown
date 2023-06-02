@@ -1,19 +1,19 @@
-import express from 'express';
-import Team from '../models/teams';
-import teams from '../data/teams.json' assert {type: 'json'};
+import express, { Router } from 'express';
+// use import controller to get routes then minimize the routes by calling the functions for controllers 
+import Team from '../models/teams.js'
+
+const router = express.Router()
 
 
 
-const app = express();
-app.use(express.json());
 
 // Get Routes
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.send('Hello World');
 });
 
 //Find Teams
-app.get('/team/', async (req, res) => {
+router.get('/team/', async (req, res) => {
   try {
     const teams = await Team.find();
     res.status(200).json(teams);
@@ -23,7 +23,7 @@ app.get('/team/', async (req, res) => {
 });
 
 //Find Team
-app.get('/team/:id', async (req, res) => {
+router.get('/team/:id', async (req, res) => {
     try {
       const teams = await Team.findOne();
       res.status(200).json(teams);
@@ -33,7 +33,7 @@ app.get('/team/:id', async (req, res) => {
   });
 
 // Post Route
-app.post('/team', async (req, res) => {
+router.post('/team', async (req, res) => {
   const team = req.body;
 
   try {
@@ -52,7 +52,7 @@ app.post('/team', async (req, res) => {
 });
 
 // Put Route
-app.put('/team/:id', async (req, res) => {
+router.put('/team/:id', async (req, res) => {
   const { id } = req.params;
   const { newName } = req.body;
 
@@ -72,7 +72,7 @@ app.put('/team/:id', async (req, res) => {
 });
 
 // Delete Route
-app.delete('/team/:id', async (req, res) => {
+router.delete('/team/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -90,3 +90,4 @@ app.delete('/team/:id', async (req, res) => {
   }
 });
 
+export default router

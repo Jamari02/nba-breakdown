@@ -14,7 +14,7 @@ const ENVIRONMENT = process.argv[2] || process.env.ENVIRONMENT
 let db = mongoose.connection
 
 
-// db config 
+// db config  
 let mongooseConfig = {
     useNewUrlParser: true,
     useUnifiedTopology: true
