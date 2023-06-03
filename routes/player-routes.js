@@ -24,13 +24,21 @@ router.get('/players/', async (req, res) => {
 
 //Find One Player
 router.get('/players/:id', async (req, res) => {
-    try {
-      const players = await Player.findOne({});
-      res.status(200).json(players);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
+  try {
+    const { id } = req.params;
+    const player = await Player.findById(id);
+    
+    if (!player) {
+      // Player with the specified ID was not found
+      return res.status(404).json({ error: 'Player not found' });
     }
-  });
+    
+    res.status(200).json(player);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 
 // Post Route
 router.post('/players/', async (req, res) => {
@@ -54,10 +62,15 @@ router.post('/players/', async (req, res) => {
 // Put Route
 router.put('/players/:id', async (req, res) => {
   const { id } = req.params;
-  const { newName } = req.body;
+  const { firstname, lastname, college } = req.body;
 
   try {
-    const response = await Player.findByIdAndUpdate(id, { new: true });
+    const response = await Player.findByIdAndUpdate(id, { 
+      firstname: firstname,
+      lastname: lastname,
+      college: college
+    }, { new: true });
+    
     res.status(200).json({
       status: 200,
       message: 'Successfully updated the player name',

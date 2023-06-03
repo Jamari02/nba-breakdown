@@ -34,4 +34,23 @@ router.post('/standing/', async (req, res) => {
   });
 
 
+  //Delete Routes
+  router.delete('/standing/:id', async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const response = await Standing.findByIdAndRemove(id);
+      res.status(200).json({
+        status: 200,
+        message: `Successfully removed the team`,
+        body: response,
+      });
+    } catch (error) {
+      res.status(400).json({
+        status: 400,
+        message: error.message,
+      });
+    }
+  });
+
   export default router

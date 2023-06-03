@@ -23,13 +23,21 @@ router.get('/team/', async (req, res) => {
 
 //Find OneTeam
 router.get('/team/:id', async (req, res) => {
-    try {
-      const teams = await Team.find();
-      res.status(200).json(teams);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
+  try {
+    const { id } = req.params;
+    const team = await Team.findById(id);
+    
+    if (!team) {
+      // Team with the specified ID was not found
+      return res.status(404).json({ error: 'Team not found' });
     }
-  });
+    
+    res.status(200).json(team);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 
 // Post Route
 router.post('/team', async (req, res) => {
@@ -53,10 +61,18 @@ router.post('/team', async (req, res) => {
 // Put Route
 router.put('/team/:id', async (req, res) => {
   const { id } = req.params;
-  const { newName } = req.body;
+  const { name, code, city } = req.body;
 
-  try {
-    const response = await Team.findByIdAndUpdate(id, { teamname: newName }, { new: true });
+try {
+    const response = await Team.findByIdAndUpdate(
+      id, 
+      { 
+        name: name,
+        code: code,
+        city: city
+      }, 
+      { new: true }
+    );
     res.status(200).json({
       status: 200,
       message: 'Successfully updated the team name',

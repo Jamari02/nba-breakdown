@@ -2,6 +2,11 @@ import mongoose from 'mongoose';
 import axios from 'axios';
 import fs from 'fs';
 import db from './connection.js'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+let apiKey = process.env.API_KEY
+
 
 //Team Data 
 
@@ -9,7 +14,7 @@ const teamOptions = {
     method: 'GET',
     url: 'https://api-nba-v1.p.rapidapi.com/teams?',
     headers: {
-        'X-RapidAPI-Key': '12bd3cc3bbmsh52036825cde08aep1e1b77jsnf376ecc4fdf3',
+        'X-RapidAPI-Key': apiKey,
         'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'
     }
 };
@@ -64,7 +69,7 @@ fetchTeamsFromAPI()
       season: '2021'
     },
     headers: {
-      'X-RapidAPI-Key': '12bd3cc3bbmsh52036825cde08aep1e1b77jsnf376ecc4fdf3',
+      'X-RapidAPI-Key': apiKey,
       'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'
     }
   };
@@ -123,7 +128,7 @@ const playerOptions = {
         season: '2021'
       },
     headers: {
-      'X-RapidAPI-Key': '12bd3cc3bbmsh52036825cde08aep1e1b77jsnf376ecc4fdf3',
+      'X-RapidAPI-Key': apiKey,
       'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'
     }
 };
