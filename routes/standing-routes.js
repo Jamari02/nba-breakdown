@@ -1,13 +1,12 @@
 import express from 'express';
 import Standing from '../models/standing.js';
 
-const app = express();
-app.use(express.json());
+const router = express.Router()
 
 //Get Routes 
-app.get('/standing/', async (req, res) => {
+router.get('/standing/', async (req, res) => {
     try {
-      const standings = await Standing.find();
+      const standing = await Standing.find();
       res.status(200).json(standing);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -16,8 +15,8 @@ app.get('/standing/', async (req, res) => {
 
 
 //Post Routes
-app.post('/standing/', async (req, res) => {
-    const team = req.body;
+router.post('/standing/', async (req, res) => {
+    const standing = req.body;
   
     try {
       const response = await Standing.create(standing);
@@ -33,3 +32,6 @@ app.post('/standing/', async (req, res) => {
       });
     }
   });
+
+
+  export default router

@@ -1,11 +1,13 @@
 import mongoose from 'mongoose'
+import Team from '../models/teams.js';
 
 const playerSchema = new mongoose.Schema({
-    name : String,
-    team : String,
-    Season: {
+    firstname : String,
+    lastname : String,
+    college : String,
+    Team: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Season"
+        ref: "Team"
       }
 });
 

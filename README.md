@@ -1,4 +1,4 @@
-# nba-breakdown
+# BBall-breakdown
 
 ### Project Proposal
 
@@ -10,9 +10,9 @@
 
 ### Routes and models
 
-- My routes will include ('/seasons', '/teams', '/standings', '/players/:id') and will be uing Get/Put/Delete/ and Post methods
+- My routes will include ('/teams', '/standings', '/players/:id') and will be uing Get/Put/Delete/ and Post methods
 
-- My models will be Team, Standing, Season, and Player
+- My models will be Team, Standing, and Player
 
 - Team and Standing will be my reference
 
@@ -22,7 +22,7 @@
 
 - As a user I should be able to query ('/standings) to find a teams record in any given season betweet the years discussed 
 
-- As a user I should be able to query ('/teams) to see how many team are available in the league 
+- As a user I should be able to query ('/teams) to see how many teams are available 
  
 - As a user i should be able to query ('/standings') to update a teams record while the season is still going on to keep the information accurate
 
@@ -33,7 +33,7 @@
 
 - I want to be able to search for any info about the teams over the years 
 
-- I want to be able to get the information on only the players that made the All-NBA 1st Team in each season
+- I want to be able to get the information on the players of both current and retired NBA/Overseas players 
 
 ### Stretch Goals
 

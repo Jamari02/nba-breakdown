@@ -1,5 +1,4 @@
 import express, { Router } from 'express';
-// use import controller to get routes then minimize the routes by calling the functions for controllers 
 import Team from '../models/teams.js'
 
 const router = express.Router()
@@ -22,10 +21,10 @@ router.get('/team/', async (req, res) => {
   }
 });
 
-//Find Team
+//Find OneTeam
 router.get('/team/:id', async (req, res) => {
     try {
-      const teams = await Team.findOne();
+      const teams = await Team.find();
       res.status(200).json(teams);
     } catch (error) {
       res.status(400).json({ error: error.message });

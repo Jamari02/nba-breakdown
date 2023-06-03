@@ -3,7 +3,8 @@ import mongoose from 'mongoose'
 const standingSchema = new mongoose.Schema({
     season : Number,
     team : String,
-    conference : String
+    win : Number,
+    loss : Number
 });
 
 const Standing = mongoose.model("Standing", standingSchema)

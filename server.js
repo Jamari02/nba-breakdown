@@ -1,7 +1,10 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
-import routes from '../nba-breakdown/routes/team-routes.js'
+import teamRoutes from '../nba-breakdown/routes/team-routes.js'
+import playerRoutes from '../nba-breakdown/routes/player-routes.js'
+import standingRoutes from '../nba-breakdown/routes/standing-routes.js'
+
 
 const app = express()
       app.use(cors())
@@ -17,7 +20,7 @@ dotenv.config()
 let PORT = process.env.PORT || 4000
 
 
-app.use('/api', routes)
+app.use('/api', teamRoutes, playerRoutes, standingRoutes)
 
 
 
