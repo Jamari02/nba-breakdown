@@ -1,10 +1,7 @@
-import express, { Router } from 'express';
+import express from 'express';
 import Team from '../models/teams.js'
 
 const router = express.Router()
-
-
-
 
 // Get Routes
 router.get('/', (req, res) => {

@@ -1,11 +1,7 @@
-import express, { Router } from 'express';
-// use import controller to get routes then minimize the routes by calling the functions for controllers 
+import express from 'express';
 import Player from '../models/players.js'
 
 const router = express.Router()
-
-
-
 
 // Get Routes
 router.get('/', (req, res) => {
