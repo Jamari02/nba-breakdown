@@ -1,9 +1,9 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
-import teamRoutes from '../routes/team-routes.js'
-import playerRoutes from '../routes/player-routes.js'
-import standingRoutes from '../routes/standing-routes.js'
+import teamRoutes from './routes/team-routes.js'
+import playerRoutes from './routes/player-routes.js'
+import standingRoutes from './routes/standing-routes.js'
 
 
 const app = express()
