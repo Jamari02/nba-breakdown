@@ -1,42 +1,81 @@
-# BBall-breakdown
+# NBA Data API Server
 
-### Project Proposal
+This is a Node.js server that fetches data from the NBA API and stores it in a MongoDB database. It provides routes to access the fetched data.
 
--My Project will allow the user to get information on any NBA teams stats and certain players stats between the early 2000's to now 
+## Prerequisites
 
-### Project name and description
+Before running the server, make sure you have the following:
 
--NBA Breakdown is an app allowing users to access certain info on NBA teams and players to better understand the game and the impact even role players could have made 
+- Node.js installed on your machine
+- MongoDB installed and running
+- RapidAPI API Key for the NBA API
 
-### Routes and models
+## Installation
 
-- My routes will include ('/teams', '/standings', '/players/:id') and will be uing Get/Put/Delete/ and Post methods
+1. Clone the repository:
 
-- My models will be Team, Standing, and Player
+   ```bash
+   git clone <repository-url>
+   ```
 
-- Team and Standing will be my reference
+2. Navigate to the project directory:
 
+   ```bash
+   cd nba-data-api-server
+   ```
 
-### User Stories
+3. Install the dependencies:
 
+   ```bash
+   npm install
+   ```
 
-- As a user I should be able to query ('/standings) to find a teams record in any given season betweet the years discussed 
+4. Create a `.env` file in the project root directory and add your RapidAPI API Key:
 
-- As a user I should be able to query ('/teams) to see how many teams are available 
- 
-- As a user i should be able to query ('/standings') to update a teams record while the season is still going on to keep the information accurate
+   ```bash
+   API_KEY=your-api-key
+   ```
 
+## Usage
 
-### MVP Goals
+To start the server, run the following command:
 
-- I want to be able to Get/Post/Put/Delete information on a NBA seasons,teams, and standings
+```bash
+npm start
+```
 
-- I want to be able to search for any info about the teams over the years 
+The server will start running on `http://localhost:4000`. You can change the port by modifying the `PORT` variable in the `.env` file.
 
-- I want to be able to get the information on the players of both current and retired NBA/Overseas players 
+## Endpoints
 
-### Stretch Goals
+The server provides the following endpoints:
 
-- I want to be able to add a players query so users can find stats on every player between the seasons discussed 
+- `/api/team` - Retrieves a list of NBA teams.
+- `/api/player` - Retrieves a list of NBA players.
+- `/api/standing` - Retrieves NBA team standings.
 
-- I want to add a games query so users can search for info on there favorite games over the years 
+### Team Endpoints
+
+- `GET /api/team` - Retrieves all NBA teams.
+- `GET /api/team/:id` - Retrieves a specific NBA team by ID.
+- `POST /api/team` - Creates a new NBA team.
+- `PUT /api/team/:id` - Updates a specific NBA team by ID.
+- `DELETE /api/team/:id` - Deletes a specific NBA team by ID.
+
+### Player Endpoints
+
+- `GET /api/player` - Retrieves all NBA players.
+- `GET /api/player/:id` - Retrieves a specific NBA player by ID.
+- `POST /api/player` - Creates a new NBA player.
+- `PUT /api/player/:id` - Updates a specific NBA player by ID.
+- `DELETE /api/player/:id` - Deletes a specific NBA player by ID.
+
+### Standing Endpoints
+
+- `GET /api/standing` - Retrieves all NBA team standings.
+- `POST /api/standing` - Creates a new NBA team standing.
+- `DELETE /api/standing/:id` - Deletes a specific NBA team standing by ID.
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
