@@ -72,19 +72,19 @@ router.post('/players/', async (req, res) => {
 });
 
 // Put Route
-router.put('/players/:id', async (req, res) => {
-  const { id } = req.params;
-  const { firstname, lastname, college } = req.body;
+router.put('/players/:firstname/:lastname', async (req, res) => {
+  const { firstname, lastname } = req.params;
+  const { college } = req.body;
 
   try {
-    const player = await Player.findByIdAndUpdate(id, {
-      firstname,
-      lastname,
-      college,
-    }, { new: true });
+    const player = await Player.findOneAndUpdate(
+      { firstname: firstname, lastname: lastname },
+      { college: college },
+      { new: true }
+    );
 
     if (!player) {
-      // Player with the specified ID was not found
+      // Player with the specified firstname and lastname was not found
       return res.status(404).json({ error: 'Player not found' });
     }
 
@@ -100,6 +100,7 @@ router.put('/players/:id', async (req, res) => {
     });
   }
 });
+
 
 
 
