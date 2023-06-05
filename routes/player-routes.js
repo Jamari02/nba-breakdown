@@ -18,6 +18,7 @@ router.get('/players/', async (req, res) => {
   }
 });
 
+
 //Find One Player
 router.get('/players/:id', async (req, res) => {
   try {
@@ -35,6 +36,21 @@ router.get('/players/:id', async (req, res) => {
   }
 });
 
+router.get('/players/:firstname/:lastname', async (req, res) => {
+  try {
+    const { firstname, lastname } = req.params;
+    const player = await Player.findOne({ firstname, lastname });
+
+    if (!player) {
+      // Player with the specified firstname and lastname was not found
+      return res.status(404).json({ error: 'Player not found' });
+    }
+
+    res.status(200).json(player);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 // Post Route
 router.post('/players/', async (req, res) => {
@@ -61,15 +77,41 @@ router.put('/players/:id', async (req, res) => {
   const { firstname, lastname, college } = req.body;
 
   try {
-    const response = await Player.findByIdAndUpdate(id, { 
-      firstname: firstname,
-      lastname: lastname,
-      college: college
+    const player = await Player.findByIdAndUpdate(id, {
+      firstname,
+      lastname,
+      college,
     }, { new: true });
-    
+
+    if (!player) {
+      // Player with the specified ID was not found
+      return res.status(404).json({ error: 'Player not found' });
+    }
+
     res.status(200).json({
       status: 200,
-      message: 'Successfully updated the player name',
+      message: 'Successfully updated the player',
+      body: player,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 400,
+      message: error.message,
+    });
+  }
+});
+
+
+
+// Delete Route
+router.delete('/players/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const response = await Player.findByIdAndRemove(id);
+    res.status(200).json({
+      status: 200,
+      message: `Successfully removed the player`,
       body: response,
     });
   } catch (error) {
@@ -80,12 +122,12 @@ router.put('/players/:id', async (req, res) => {
   }
 });
 
-// Delete Route
-router.delete('/players/:id', async (req, res) => {
-  const { id } = req.params;
+
+router.delete('/players/:firstname/:lastname', async (req, res) => {
+  const { firstname, lastname } = req.params;
 
   try {
-    const response = await Player.findByIdAndRemove(id);
+    const response = await Player.findOneAndRemove({firstname, lastname});
     res.status(200).json({
       status: 200,
       message: `Successfully removed the player`,

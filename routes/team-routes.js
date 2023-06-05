@@ -35,6 +35,24 @@ router.get('/team/:id', async (req, res) => {
   }
 });
 
+// Get a Team by Name
+router.get('/team/name/:name', async (req, res) => {
+  const { name } = req.params;
+
+  try {
+    const team = await Team.findOne({ name });
+    if (!team) {
+      // Team with the specified name was not found
+      return res.status(404).json({ error: 'Team not found' });
+    }
+
+    res.status(200).json(team);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+
 
 // Post Route
 router.post('/team', async (req, res) => {
@@ -101,5 +119,30 @@ router.delete('/team/:id', async (req, res) => {
     });
   }
 });
+
+// Delete Route
+router.delete('/team/name/:name', async (req, res) => {
+  const { name } = req.params;
+
+  try {
+    const response = await Team.findOneAndRemove({ name });
+    if (!response) {
+      // Team with the specified name was not found
+      return res.status(404).json({ error: 'Team not found' });
+    }
+    
+    res.status(200).json({
+      status: 200,
+      message: `Successfully removed the team`,
+      body: response,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 400,
+      message: error.message,
+    });
+  }
+});
+
 
 export default router
