@@ -74,28 +74,23 @@ router.post('/team', async (req, res) => {
 });
 
 // Put Route
-router.put('/team/:id', async (req, res) => {
-  const { id } = req.params;
+router.put('/team/name/:name', async (req, res) => {
+  const { teamName } = req.params;
   const { name, code, city } = req.body;
-
 try {
-    const response = await Team.findByIdAndUpdate(
-      id, 
-      { 
-        name: name,
-        code: code,
-        city: city
-      }, 
-      { new: true }
-    );
-    res.status(200).json({
-      status: 200,
-      message: 'Successfully updated the team name',
-      body: response,
-    });
+    const team = await Team.findOne(teamName)  
+   if (!team) {
+    res.status(404)
+    throw new Error('Team not found')
+   } 
+   team.name = name
+   team.code = code
+   team.city =city
+   await team.save()
+   res.json(team)
   } catch (error) {
-    res.status(400).json({
-      status: 400,
+    res.status(500).json({
+      status: 500,
       message: error.message,
     });
   }
